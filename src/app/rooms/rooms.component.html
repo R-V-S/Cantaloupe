@@ -1,0 +1,13 @@
+<section id="room-component">
+    <ul id="room-list">
+    <li *ngFor="let room of rooms | async">
+      <button (click)="setRoom(room)" class="room-name">{{ room.name }}</button>
+      <button (click)="removeRoom(room)" class="remove remove-room-button" *ngIf="(room.creator)?.email === user?.email">&times;</button>
+    </li>
+  </ul>
+
+  <form id="create-room" #roomForm="ngForm" (ngSubmit)="createRoom(newRoomName)" *ngIf="user">
+    <input type="text" [(ngModel)]="newRoomName" name="newRoomName" placeholder="Create a new room">
+    <input type="submit" value="+">
+  </form>
+</section>

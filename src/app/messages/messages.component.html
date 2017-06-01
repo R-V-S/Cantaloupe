@@ -1,0 +1,22 @@
+<main id="messages-component">
+  <h2>{{ (activeRoom)?.name }}</h2>
+  <ul id="message-list" #messageList>
+    <li *ngFor="let message of messages | async">
+      <div class="photo-url">
+        <img [src]="(message.creator)?.photoURL || 'assets/images/cantaloupe-default-user-image.png'">
+      </div>
+      <div class="info">
+        <div class="display-name">{{ (message.creator)?.displayName }}</div>
+        <div class="sent-at">{{ message.sentAt | timeago }}</div>
+      </div>
+      <div class="content">
+        {{ message.content }} 
+        <button (click)="removeMessage(message)" class="remove remove-message-button" *ngIf="(message.creator)?.email == (this.user)?.email">&times;</button>
+      </div>
+    </li>
+  </ul>
+  <form #messageForm="ngForm" (ngSubmit)="createMessage(messageText)">
+    <input type="text" [(ngModel)]="messageText" name="messageText" placeholder="Say something">
+    <input type="submit">
+  </form>
+</main>

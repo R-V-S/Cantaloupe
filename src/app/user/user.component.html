@@ -1,0 +1,14 @@
+<div id="user-display">
+  <div id="avatar">
+    <img [src]="(user | async)?.photoURL || 'assets/images/cantaloupe-default-user-image.png'">
+  </div>
+  <div id="user-display-name">{{ (user | async)?.displayName?.split(' ')[0] || 'Curious Cantaloupe' }}</div>
+  <button class="sign-in-out" id="sign-in" (click)="signin()" *ngIf="!(user | async)?.email">
+    <i class="material-icons">power_settings_new</i>
+    <span>Sign in</span>
+  </button>
+  <button class="sign-in-out" id="sign-out" (click)="signout()" *ngIf="(user | async)?.email">
+    <i class="material-icons">power_settings_new</i>
+    <span>Sign out</span>
+  </button>
+</div>
